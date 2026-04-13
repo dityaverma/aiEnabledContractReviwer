@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lexis AI — Contract Intelligence Platform</title>
+  <link rel="stylesheet" href="src/styles/main.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     PAGE 1 — LANDING
+════════════════════════════════════════ -->
+<div id="pg-landing" class="page on">
+  <nav class="nav">
+    <div class="nav-logo">Lexis<span>AI</span></div>
+    <div class="nav-links">
+      <a onclick="scrollTo(0,0)">Home</a>
+      <a onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Features</a>
+      <a onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">How it works</a>
+    </div>
+    <button class="nav-cta" onclick="goApp()">Open platform →</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-badge"><span class="badge-dot"></span>AI-Powered · Free to use · No signup needed</div>
+    <h1>Your contracts,<br><em>risk-free</em></h1>
+    <p class="hero-sub">Upload any legal document and get instant AI-powered clause analysis, loophole detection, obligation extraction, and a plain-English risk report in seconds.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goApp()">Analyze a contract</button>
+      <button class="btn-secondary" onclick="goApp(); setTimeout(()=>loadDemo(),300)">Try demo contract</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">18+</div><div class="stat-label">Clause types detected</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Free for college use</div></div>
+      <div class="stat-item"><div class="stat-num">&lt;10s</div><div class="stat-label">Average analysis time</div></div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#7c6dfa" stroke-width="1.5"><path d="M2 4h12M2 8h8M2 12h5"/></svg>
+      </div>
+      <div class="feat-title">Clause extraction</div>
+      <div class="feat-desc">Automatically segments and classifies payment, termination, liability, NDA, delivery, jurisdiction, and 12 other clause types from any contract.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#e05555" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3M8 10.5v.5"/></svg>
+      </div>
+      <div class="feat-title">Loophole detection</div>
+      <div class="feat-desc">Flags vague language ("reasonable time", "best efforts"), missing protection clauses, one-sided obligations, and undefined legal terms.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#4caf7d" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>
+      </div>
+      <div class="feat-title">Risk scoring</div>
+      <div class="feat-desc">Generates a weighted 1–10 risk score with full issue breakdown, severity classification, and prioritised, actionable recommendations.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#d4893a" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-3 2.7-5 6-5s6 2 6 5"/></svg>
+      </div>
+      <div class="feat-title">Obligation extraction</div>
+      <div class="feat-desc">Identifies who must do what and by when. Maps every party's obligations, actions, and deadlines into a structured, readable table.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#5b9cf6" stroke-width="1.5"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v7a1 1 0 01-1 1H9l-3 2v-2H3a1 1 0 01-1-1V3z"/></svg>
+      </div>
+      <div class="feat-title">AI lawyer chat</div>
+      <div class="feat-desc">Ask anything about your contract in plain English. The AI remembers your full document and answers with practical legal insight instantly.</div>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#9b8fff" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>
+      </div>
+      <div class="feat-title">Analysis report</div>
+      <div class="feat-desc">Full structured report with contract summary, clause breakdown, obligation table, detected issues, risk score, and AI recommendations.</div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="how-section">
+    <div class="how-title">How it works</div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="how-num">1</div>
+        <div class="how-label">Upload or paste your contract</div>
+        <div class="how-desc">PDF, DOCX, TXT, or raw text — any format works</div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-num">2</div>
+        <div class="how-label">AI analyzes in seconds</div>
+        <div class="how-desc">Clause parsing, classification, obligation extraction, loophole detection</div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-num">3</div>
+        <div class="how-label">Review your risk report</div>
+        <div class="how-desc">Full clause breakdown, risk score, issues, and recommendations</div>
+      </div>
+      <div class="how-arrow">→</div>
+      <div class="how-step">
+        <div class="how-num">4</div>
+        <div class="how-label">Ask the AI anything</div>
+        <div class="how-desc">Chat with AI lawyer about any clause or risk in plain English</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-logo">Lexis<span>AI</span></div>
+    <div class="footer-text">Built as a college project. AI analysis is for educational purposes only — not legal advice.</div>
+  </footer>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     PAGE 2 — APP PLATFORM
+════════════════════════════════════════ -->
+<div id="pg-app" class="page">
+  <nav class="nav">
+    <div class="nav-logo" style="cursor:pointer" onclick="goLanding()">← Lexis<span>AI</span></div>
+    <div class="nav-links">
+      <a onclick="goSub('dashboard')">Dashboard</a>
+      <a onclick="goSub('upload')">Upload</a>
+      <a onclick="goSub('chat')">AI chat</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div id="api-status" class="api-pill" onclick="goSub('settings')">⚙ Configure AI</div>
+      <button class="nav-cta" onclick="goSub('upload')">+ New contract</button>
+    </div>
+  </nav>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="s-section">Main</div>
+      <div class="s-item active" id="si-dashboard" onclick="goSub('dashboard')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+        Dashboard
+      </div>
+      <div class="s-item" id="si-upload" onclick="goSub('upload')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 10V3M5 6l3-3 3 3"/><path d="M2 11v1a2 2 0 002 2h8a2 2 0 002-2v-1"/></svg>
+        Upload contract
+      </div>
+      <div class="s-section">Analysis</div>
+      <div class="s-item" id="si-analysis" onclick="goSub('analysis')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l4-4 3 3 5-6"/></svg>
+        Risk analysis
+      </div>
+      <div class="s-item" id="si-chat" onclick="goSub('chat')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3a1 1 0 011-1h10a1 1 0 011 1v7a1 1 0 01-1 1H9l-3 2v-2H3a1 1 0 01-1-1V3z"/></svg>
+        Ask AI lawyer
+      </div>
+      <div class="s-section">Settings</div>
+      <div class="s-item" id="si-settings" onclick="goSub('settings')">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2"/></svg>
+        AI settings
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="topbar">
+        <div class="topbar-title" id="tb-title">Dashboard</div>
+      </div>
+      <div class="app-content">
+
+        <!-- ══ DASHBOARD ══ -->
+        <div id="sub-dashboard" class="subpage on">
+          <div class="metrics">
+            <div class="metric"><div class="metric-label">Total contracts</div><div class="metric-value" id="m-total">0</div><div class="metric-sub">in this session</div></div>
+            <div class="metric red"><div class="metric-label">High risk</div><div class="metric-value" id="m-high">0</div><div class="metric-sub">needs attention</div></div>
+            <div class="metric amber"><div class="metric-label">Medium risk</div><div class="metric-value" id="m-med">0</div><div class="metric-sub">review advised</div></div>
+            <div class="metric green"><div class="metric-label">Low risk</div><div class="metric-value" id="m-low">0</div><div class="metric-sub">cleared</div></div>
+          </div>
+          <div class="section-hd">Analyzed contracts</div>
+          <div class="ctable">
+            <div class="ct-head">
+              <span>Name</span><span>Type</span><span>Risk score</span><span>Status</span><span>Clauses</span>
+            </div>
+            <div id="contract-rows">
+              <div class="ct-empty">No contracts analyzed yet. <span onclick="goSub('upload')" style="color:var(--accent);cursor:pointer">Upload one to get started →</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ UPLOAD ══ -->
+        <div id="sub-upload" class="subpage">
+          <div class="upload-wrap">
+            <div class="drop-zone" id="dz" onclick="document.getElementById('fi').click()"
+                 ondragover="event.preventDefault();this.classList.add('dragover')"
+                 ondragleave="this.classList.remove('dragover')"
+                 ondrop="handleDrop(event)">
+              <div class="dz-icon">
+                <svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="#7c6dfa" stroke-width="1.5"><path d="M10 13V5M7 8l3-3 3 3"/><path d="M3 14v1a3 3 0 003 3h8a3 3 0 003-3v-1"/></svg>
+              </div>
+              <div class="dz-title">Drop your contract here</div>
+              <div class="dz-sub">or click to browse — PDF, DOCX, TXT supported</div>
+              <div class="fmt-tags"><span class="fmt">PDF</span><span class="fmt">DOCX</span><span class="fmt">TXT</span></div>
+            </div>
+            <input type="file" id="fi" accept=".pdf,.docx,.txt,.pdf" onchange="handleFile(this)" />
+
+            <div class="or-divider"><span>or paste text directly</span></div>
+
+            <textarea id="ct-text" placeholder="Paste your contract text here for instant AI analysis...&#10;&#10;Example: 'The Supplier shall deliver goods within a reasonable time. Either party may terminate this agreement at any time with 7 days notice...'"></textarea>
+
+            <div class="upload-actions">
+              <button class="analyze-btn" onclick="startAnalysis()">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-right:8px"><path d="M2 12l4-4 3 3 5-6"/></svg>
+                Analyze contract with AI
+              </button>
+              <button class="demo-btn" onclick="loadDemo()">Load demo contract</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ ANALYZING ══ -->
+        <div id="sub-analyzing" class="subpage">
+          <div class="prog-wrap">
+            <div class="prog-title">Analyzing your contract</div>
+            <div class="prog-sub" id="prog-mode-label">AI engine is parsing, classifying, and risk-scoring</div>
+            <div class="prog-bar"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+            <div class="steps">
+              <div class="step pending" id="s1"><span class="step-dot"></span>Parsing document structure</div>
+              <div class="step pending" id="s2"><span class="step-dot"></span>Extracting and segmenting clauses</div>
+              <div class="step pending" id="s3"><span class="step-dot"></span>Classifying clause types</div>
+              <div class="step pending" id="s4"><span class="step-dot"></span>Extracting party obligations</div>
+              <div class="step pending" id="s5"><span class="step-dot"></span>Detecting loopholes and vague language</div>
+              <div class="step pending" id="s6"><span class="step-dot"></span>Generating risk score and recommendations</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ ANALYSIS RESULTS ══ -->
+        <div id="sub-analysis" class="subpage">
+          <div class="analysis-grid">
+            <div class="analysis-left">
+
+              <div class="card">
+                <div class="card-hd">Contract summary</div>
+                <p id="a-summary" class="body-text">No contract analyzed yet.</p>
+              </div>
+
+              <div class="card">
+                <div class="card-hd">Detected clauses <span id="clause-count" class="count-badge">0</span></div>
+                <div id="a-clauses"><div class="empty-state">Analyze a contract to see clauses</div></div>
+              </div>
+
+              <div class="card">
+                <div class="card-hd">Obligations extracted</div>
+                <div id="a-obligations">
+                  <div class="empty-state">Obligations will appear here after analysis</div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-hd">AI recommendations</div>
+                <div id="a-recs"><div class="empty-state">Recommendations will appear here after analysis</div></div>
+              </div>
+
+            </div>
+            <div class="analysis-right">
+
+              <div class="card">
+                <div class="card-hd">Risk score</div>
+                <div class="score-big">
+                  <div class="score-num" id="a-score" style="color:var(--text3)">—</div>
+                  <div class="score-label" id="a-score-label">No analysis yet</div>
+                </div>
+                <div class="score-meta" id="a-score-meta"></div>
+              </div>
+
+              <div class="card">
+                <div class="card-hd">Detected issues <span id="issue-count" class="count-badge">0</span></div>
+                <div id="a-issues"><div class="empty-state">Issues will appear after analysis</div></div>
+              </div>
+
+              <button class="sidebar-btn sb-primary" onclick="goSub('chat')">Ask AI about this contract</button>
+              <button class="sidebar-btn sb-sec" onclick="exportReport()">Export text report</button>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ AI CHAT ══ -->
+        <div id="sub-chat" class="subpage">
+          <div class="chat-wrap">
+            <div class="chat-msgs" id="chat-msgs">
+              <div class="msg ai">Hi! I'm your AI legal assistant. Upload and analyze a contract first, then ask me anything about it — risks, specific clauses, what to negotiate, or anything in plain English.</div>
+            </div>
+            <div class="chat-suggestions" id="chat-suggestions">
+              <span onclick="quickAsk('What is the biggest risk in this contract?')">What's the biggest risk?</span>
+              <span onclick="quickAsk('Explain the termination clause in simple terms')">Explain termination clause</span>
+              <span onclick="quickAsk('What should I negotiate before signing?')">What to negotiate?</span>
+              <span onclick="quickAsk('List all vague or undefined terms in this contract')">Find vague terms</span>
+            </div>
+            <div class="chat-row">
+              <input type="text" class="chat-in" id="chat-in" placeholder="Ask about your contract..." onkeydown="if(event.key==='Enter')sendMsg()" />
+              <button class="send-btn" onclick="sendMsg()">Send</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ SETTINGS ══ -->
+        <div id="sub-settings" class="subpage">
+          <div class="settings-wrap">
+            <div class="card">
+              <div class="card-hd">AI provider</div>
+              <p class="body-text" style="margin-bottom:16px">Choose which AI to use for contract analysis. All options work — pick whichever you have a free key for.</p>
+
+              <div class="provider-list">
+                <div class="provider-item" id="prov-demo" onclick="setProvider('demo')">
+                  <div class="prov-radio" id="radio-demo"></div>
+                  <div>
+                    <div class="prov-name">Demo mode <span class="prov-tag free">No key needed</span></div>
+                    <div class="prov-desc">Uses realistic pre-built analysis. Perfect for testing the UI.</div>
+                  </div>
+                </div>
+                <div class="provider-item" id="prov-gemini" onclick="setProvider('gemini')">
+                  <div class="prov-radio" id="radio-gemini"></div>
+                  <div>
+                    <div class="prov-name">Google Gemini Flash <span class="prov-tag free">Free tier</span></div>
+                    <div class="prov-desc">1M tokens/day free. Get key at aistudio.google.com — best free option.</div>
+                  </div>
+                </div>
+                <div class="provider-item" id="prov-groq" onclick="setProvider('groq')">
+                  <div class="prov-radio" id="radio-groq"></div>
+                  <div>
+                    <div class="prov-name">Groq (Llama 3) <span class="prov-tag free">Free tier</span></div>
+                    <div class="prov-desc">Extremely fast. Free API at console.groq.com. OpenAI-compatible.</div>
+                  </div>
+                </div>
+                <div class="provider-item" id="prov-claude" onclick="setProvider('claude')">
+                  <div class="prov-radio" id="radio-claude"></div>
+                  <div>
+                    <div class="prov-name">Anthropic Claude <span class="prov-tag paid">Free credits on signup</span></div>
+                    <div class="prov-desc">Best quality. Free trial credits at console.anthropic.com.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" id="key-card">
+              <div class="card-hd">API key</div>
+              <p class="body-text" style="margin-bottom:12px" id="key-hint">Paste your API key below. It is stored only in your browser (localStorage) and never sent anywhere except the AI provider.</p>
+              <div style="display:flex;gap:10px">
+                <input type="password" id="api-key-input" class="key-input" placeholder="Paste your API key here..." />
+                <button class="btn-save-key" onclick="saveKey()">Save</button>
+              </div>
+              <div id="key-saved-msg" style="font-size:12px;color:var(--green);margin-top:8px;display:none">✓ Key saved in browser</div>
+            </div>
+
+            <div class="card">
+              <div class="card-hd">How to get a free API key</div>
+              <div class="howto-list">
+                <div class="howto-item">
+                  <div class="howto-num">1</div>
+                  <div><strong>Gemini (recommended):</strong> Go to <code>aistudio.google.com</code> → Sign in with Google → Click "Get API key" → Copy it. Free, no card needed.</div>
+                </div>
+                <div class="howto-item">
+                  <div class="howto-num">2</div>
+                  <div><strong>Groq:</strong> Go to <code>console.groq.com</code> → Create free account → API Keys → Create key. Runs Llama 3, very fast.</div>
+                </div>
+                <div class="howto-item">
+                  <div class="howto-num">3</div>
+                  <div><strong>Claude:</strong> Go to <code>console.anthropic.com</code> → Create account → You get free credits automatically → API Keys → Create key.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="src/components/demo-data.js"></script>
+<script src="src/components/ai-providers.js"></script>
+<script src="src/components/analysis-engine.js"></script>
+<script src="src/components/app.js"></script>
+</body>
+</html>
