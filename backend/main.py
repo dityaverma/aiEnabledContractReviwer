@@ -1,14 +1,3 @@
-"""
-Lexis AI — FastAPI Backend
-══════════════════════════════
-Run:
-  pip install -r requirements.txt
-  cp .env.example .env   (add ANTHROPIC_API_KEY)
-  uvicorn main:app --reload --port 8000
-
-API docs:  http://localhost:8000/docs
-"""
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -25,7 +14,6 @@ app = FastAPI(
     description="Contract intelligence: clause extraction, loophole detection, risk scoring.",
 )
 
-# ── CORS ──
 origins = os.getenv("CORS_ORIGINS", "http://localhost:5500,http://127.0.0.1:5500").split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -35,7 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ── Routers ──
 app.include_router(analysis.router,  prefix="/api", tags=["Analysis"])
 app.include_router(chat.router,      prefix="/api", tags=["Chat"])
 app.include_router(contracts.router, prefix="/api", tags=["Contracts"])

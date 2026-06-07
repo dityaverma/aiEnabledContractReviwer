@@ -1,32 +1,21 @@
-/* ═══════════════════════════════════════════
-   ANALYSIS ENGINE
-   Manages the analysis pipeline:
-   progress steps → AI call → UI population
-   ═══════════════════════════════════════════ */
-
 const Engine = {
 
-  /* Current analysis result stored here */
   lastResult:  null,
   lastText:    '',
-  contracts:   [],   /* in-session contract history */
+  contracts:   [],
 
-  /* ── Run full analysis ── */
   async run(contractText) {
     this.lastText = contractText;
 
-    /* Show progress screen */
     goSub('analyzing');
     document.getElementById('prog-mode-label').textContent =
       AI.provider === 'demo'
         ? 'Running demo analysis (no API key needed)'
         : `Analyzing with ${this._providerLabel(AI.provider)}…`;
 
-    /* Animate progress steps */
     const STEPS   = ['s1','s2','s3','s4','s5','s6'];
     const PERCENTS = [15, 30, 50, 65, 82, 100];
 
-    /* Start AI call in parallel with animation */
     const aiPromise = AI.analyze(contractText).catch(err => {
       return { _error: err.message };
     });
@@ -39,7 +28,6 @@ const Engine = {
       if (fill) fill.style.width = PERCENTS[i] + '%';
     }
 
-    /* Wait for AI */
     const result = await aiPromise;
     _setStep(STEPS[STEPS.length - 1], 'done');
     await _delay(350);
@@ -50,7 +38,6 @@ const Engine = {
       return;
     }
 
-    /* Store + populate */
     this.lastResult = result;
     this._saveToHistory(result, contractText);
     this._populateUI(result);
@@ -58,12 +45,9 @@ const Engine = {
     goSub('analysis');
   },
 
-  /* ── Populate every section of the analysis page ── */
   _populateUI(r) {
-    /* Summary */
     _setText('a-summary', r.summary || 'No summary available.');
 
-    /* Risk score */
     const score   = parseFloat(r.risk_score) || 0;
     const scoreEl = document.getElementById('a-score');
     if (scoreEl) {
@@ -75,11 +59,9 @@ const Engine = {
     const issueCount  = r.issues?.length  || 0;
     _setText('a-score-meta', `${issueCount} issues across ${clauseCount} clauses`);
 
-    /* Clause count badge */
     _setText('clause-count', clauseCount);
     _setText('issue-count',  issueCount);
 
-    /* Clauses */
     if (r.clauses?.length) {
       _setHTML('a-clauses', r.clauses.map(c => `
         <div class="clause-item">
@@ -93,7 +75,6 @@ const Engine = {
       _setHTML('a-clauses', '<div class="empty-state">No clauses detected</div>');
     }
 
-    /* Obligations */
     if (r.obligations?.length) {
       const rows = r.obligations.map(o => `
         <tr>
@@ -112,7 +93,6 @@ const Engine = {
       _setHTML('a-obligations', '<div class="empty-state">No obligations extracted</div>');
     }
 
-    /* Issues */
     if (r.issues?.length) {
       _setHTML('a-issues', r.issues.map(i => `
         <div class="issue-item i-${_sevClass(i.severity)}">
@@ -123,7 +103,6 @@ const Engine = {
       _setHTML('a-issues', '<div class="empty-state">No issues detected — looks clean!</div>');
     }
 
-    /* Recommendations */
     if (r.recommendations?.length) {
       _setHTML('a-recs', r.recommendations.map((rec, i) => `
         <div class="rec-item">
@@ -135,7 +114,6 @@ const Engine = {
     }
   },
 
-  /* ── Save to in-session history ── */
   _saveToHistory(result, text) {
     const entry = {
       id:         Date.now(),
@@ -151,7 +129,6 @@ const Engine = {
     this.contracts.unshift(entry);
   },
 
-  /* ── Guess contract name from text ── */
   _guessName(text) {
     const lines = text.trim().split('\n').slice(0, 6);
     for (const line of lines) {
@@ -163,7 +140,6 @@ const Engine = {
     return 'Contract ' + new Date().toLocaleDateString();
   },
 
-  /* ── Guess contract type from clause types ── */
   _guessType(result) {
     const types = (result.clauses || []).map(c => (c.type || '').toLowerCase());
     if (types.includes('nda'))         return 'NDA';
@@ -177,7 +153,6 @@ const Engine = {
     return { gemini: 'Google Gemini', groq: 'Groq (Llama 3)', claude: 'Claude', demo: 'Demo' }[p] || p;
   },
 
-  /* ── Export plain text report ── */
   exportReport() {
     const r = this.lastResult;
     if (!r) { alert('No analysis to export yet.'); return; }
@@ -211,7 +186,6 @@ const Engine = {
 
     txt    += `\n${'═'.repeat(50)}\nNote: This report is for educational purposes only. Not legal advice.\n`;
 
-    /* Trigger download */
     const blob = new Blob([txt], { type: 'text/plain' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
@@ -222,9 +196,6 @@ const Engine = {
   },
 };
 
-/* ═══════════════════════════════════════════
-   SHARED UTILITY FUNCTIONS
-   ═══════════════════════════════════════════ */
 function _delay(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function _setStep(id, state) {

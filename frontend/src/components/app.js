@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   LEXIS AI — MAIN APP
-   Navigation, settings, chat, dashboard
-   ═══════════════════════════════════════════ */
-
-/* ── Page/subpage titles ── */
 const PAGE_TITLES = {
   dashboard: 'Dashboard',
   upload:    'Upload contract',
@@ -14,12 +8,8 @@ const PAGE_TITLES = {
 };
 const SIDEBAR_IDS = ['dashboard', 'upload', 'analysis', 'chat', 'settings'];
 
-/* Chat history (in memory per session) */
 let chatHistory = [];
 
-/* ═══════════════════════════════════════════
-   INIT — runs on page load
-   ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   AI.load();
   updateProviderUI();
@@ -27,9 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateApiPill();
 });
 
-/* ═══════════════════════════════════════════
-   PAGE NAVIGATION
-   ═══════════════════════════════════════════ */
 function goApp() {
   showPage('pg-app');
   goSub('dashboard');
@@ -49,7 +36,6 @@ function handleLogin() {
   const pass  = document.getElementById('login-pass').value.trim();
   const err   = document.getElementById('login-error');
 
-  // Demo Credentials Check
   if (email === 'admin@lexisai.com' && pass === 'admin123') {
     goApp();
   } else {
@@ -76,14 +62,10 @@ function goSub(name) {
   });
 }
 
-/* ═══════════════════════════════════════════
-   UPLOAD & FILE HANDLING
-   ═══════════════════════════════════════════ */
 async function handleFile(input) {
   if (!input.files?.[0]) return;
   const file = input.files[0];
 
-  /* Show filename & parsing status */
   const dz = document.getElementById('dz');
   dz.innerHTML = `
     <div class="dz-icon">
@@ -92,7 +74,6 @@ async function handleFile(input) {
     <div class="dz-title">Parsing ${_esc(file.name)}...</div>
     <div class="dz-sub">Extracting text via Lexis AI backend</div>`;
 
-  /* handle TXT locally for speed */
   if (file.type === 'text/plain' || file.name.endsWith('.txt')) {
     const reader = new FileReader();
     reader.onload = e => {
@@ -101,7 +82,6 @@ async function handleFile(input) {
     };
     reader.readAsText(file);
   }
-  /* Call backend for PDF/DOCX */
   else {
     const formData = new FormData();
     formData.append('file', file);
@@ -117,7 +97,7 @@ async function handleFile(input) {
       _showUploadSuccess(file.name);
     } catch (err) {
       dz.innerHTML = `
-        <div class="dz-icon"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="#e05555" stroke-width="1.5"><path d="M10 13V5M7 8l3-3 3 3"/><path d="M3 14v1a3 3 0 003 3h8a3 3 0 003-3v-1"/></svg></div>
+        <div class="dz-icon"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="#e05555" stroke-width="1.5"><path d="M10 13V5M7 8l3-3 3 3"/><path d="M3 14v1a3 3 0 003 3h8a3 3 0 0[...]` ;
         <div class="dz-title">Parse failed</div>
         <div class="dz-sub" style="color:var(--red)">Make sure the backend is running</div>`;
       alert('Backend error: Could not parse document. Is the server running?');
@@ -143,7 +123,6 @@ function handleDrop(event) {
   const file = event.dataTransfer?.files?.[0];
   if (file) {
     const input = document.getElementById('fi');
-    /* Simulate file selection */
     const dt = new DataTransfer();
     dt.items.add(file);
     input.files = dt.files;
@@ -151,9 +130,6 @@ function handleDrop(event) {
   }
 }
 
-/* ═══════════════════════════════════════════
-   START ANALYSIS
-   ═══════════════════════════════════════════ */
 async function startAnalysis() {
   const text = document.getElementById('ct-text').value.trim();
   if (!text) {
@@ -164,13 +140,11 @@ async function startAnalysis() {
     alert('Contract text is too short. Please paste more content.');
     return;
   }
-  /* Reset chat when new contract loaded */
   chatHistory = [];
   resetChat();
   await Engine.run(text);
 }
 
-/* ── Load demo contract ── */
 function loadDemo() {
   goSub('upload');
   document.getElementById('ct-text').value = DEMO_CONTRACT_TEXT;
@@ -184,14 +158,10 @@ function loadDemo() {
     <div class="dz-sub" style="color:var(--accent)">Demo contract loaded — click Analyze</div>`;
 }
 
-/* ── Export report ── */
 function exportReport() {
   Engine.exportReport();
 }
 
-/* ═══════════════════════════════════════════
-   DASHBOARD
-   ═══════════════════════════════════════════ */
 function updateDashboard() {
   const contracts = Engine.contracts;
   const total  = contracts.length;
@@ -231,9 +201,6 @@ function loadContractResult(id) {
   goSub('analysis');
 }
 
-/* ═══════════════════════════════════════════
-   AI CHAT
-   ═══════════════════════════════════════════ */
 async function sendMsg() {
   const input = document.getElementById('chat-in');
   const q     = input.value.trim();
@@ -288,20 +255,15 @@ function resetChat() {
     <div class="msg ai">Contract loaded! Ask me anything about it — risks, specific clauses, what to negotiate, or anything in plain English.</div>`;
 }
 
-/* ═══════════════════════════════════════════
-   SETTINGS — PROVIDER & API KEY
-   ═══════════════════════════════════════════ */
 function setProvider(p) {
   AI.provider = p;
   AI.save();
   updateProviderUI();
   updateApiPill();
 
-  /* Show/hide key card */
   const keyCard = document.getElementById('key-card');
   if (keyCard) keyCard.style.display = p === 'demo' ? 'none' : 'block';
 
-  /* Update key hint text */
   const hints = {
     gemini: 'Paste your Google Gemini API key (from aistudio.google.com)',
     groq:   'Paste your Groq API key (from console.groq.com)',
@@ -309,7 +271,6 @@ function setProvider(p) {
   };
   _setText('key-hint', hints[p] || '');
 
-  /* Pre-fill if key exists */
   const keyInput = document.getElementById('api-key-input');
   if (keyInput) keyInput.value = AI.key || '';
 }

@@ -1,8 +1,3 @@
-/* ═══════════════════════════════════════════
-   DEMO DATA — realistic contract analysis
-   Used when provider = 'demo' (no API key needed)
-   ═══════════════════════════════════════════ */
-
 const DEMO_CONTRACT_TEXT = `SUPPLIER AGREEMENT
 
 This Supplier Agreement ("Agreement") is entered into as of January 1, 2026, between
@@ -49,7 +44,7 @@ Any disputes arising under this Agreement shall be resolved through binding arbi
 at a location chosen by the Supplier, with costs shared equally.`;
 
 const DEMO_RESULT = {
-  summary: "This Supplier Agreement between TechBuyer Pvt. Ltd. and Acme Industrial Supplies governs the supply of industrial goods. The contract spans 10 clauses including payment, delivery, termination, and IP rights. Several provisions are heavily one-sided in favour of the Supplier, with vague language throughout and missing standard buyer protections.",
+  summary: "This Supplier Agreement between TechBuyer Pvt. Ltd. and Acme Industrial Supplies governs the supply of industrial goods. The contract spans 10 clauses including payment, delivery, term[...]",
   risk_score: 8.4,
   risk_level: "High",
   clauses: [
